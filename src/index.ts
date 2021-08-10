@@ -13,8 +13,7 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 const main = async () => {
-  // setting up mikro-orm
-  // graphql need to access orm object in resolver
+
   const orm = await MikroORM.init(microConfig); // connect to db
   await orm.getMigrator().up(); // runs the migration
 
@@ -28,23 +27,16 @@ const main = async () => {
       resolvers: [HelloResolver, PostResolver],
       validate: false,
     }),
-    // special object,its accessiable by all your resolvers
-    // a fucntion that returns an object for the context
     context: () => ({ em: orm.em }),
   });
 
   await apolloServer.start();
-  // create an graqphql endpoint on express
   apolloServer.applyMiddleware({ app });
 
   app.listen(4000, () => {
     console.log("server started on localhost:4000");
   });
 
-  // // below runs sql command
-  // const post = orm.em.create(Post, { title: "my fitst post" }); // creates an instance of post
-  // // const post = new Post('my first post') -- same as above
-  // await orm.em.persistAndFlush(post); // insert the post object into the database
 };
 main().catch((err) => {
   console.error(err);
