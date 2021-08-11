@@ -12,6 +12,7 @@ export default {
   port: process.env.DB_PORT,
   user: process.env.DB_USER,
   dbName: process.env.DB_NAME,
+  password:process.env.DB_PASSWORD,
   debug: !__prod__, 
   type: process.env.DB_TYPE,
 } as Parameters<typeof MikroORM.init>[0];
