@@ -9,6 +9,7 @@ export default {
     pattern: /^[\w-]+\d+\.[tj]s$/, 
   },
   entities: [Post], 
+  // host: "process.env.DB_HOST",
   port: process.env.DB_PORT,
   user: process.env.DB_USER,
   dbName: process.env.DB_NAME,
