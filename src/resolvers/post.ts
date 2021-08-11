@@ -17,7 +17,7 @@ export class PostResolver {
   ): Promise<Post | null> {
     return em.findOne(Post, { id });
   }
-  //
+  // create post 
   @Mutation(() => Post)
   async createPost(
     @Arg("title") title: String,
@@ -27,7 +27,7 @@ export class PostResolver {
     await em.persistAndFlush(post);
     return post;
   }
-
+// update post 
   @Mutation(() => Post, { nullable: true })
   async updatePost(
     @Arg("id") id: number,
